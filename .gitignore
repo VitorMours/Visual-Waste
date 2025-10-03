@@ -1,0 +1,16 @@
+venv
+/venv
+venv/
+
+runs
+/runs
+runs/
+
+
+datasets
+/datasets
+datasets/
+
+__pycache__
+/__pycache__
+__pycache__/
