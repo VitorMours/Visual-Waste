@@ -12,11 +12,11 @@ class ComputerVisionService:
     
     def train_model(self) -> None:
         """giving the model a dataset to train, and be cappable of detect objects"""
-        self.model.train(data="coco8.yaml", epochs=20, imgsz=720)
+        self.model.train(data="coco8.yaml", epochs=15, imgsz=640)
         self._trained = True
         
     
-    
+
     def start_model(self) -> YOLO:
         """
         Starting the computer vision model to detect objects based on  the webcam of the computer
@@ -96,22 +96,15 @@ class ComputerVisionService:
                 print("Error: Could not read frame")
                 break
             
-            # Realiza a detecção de objetos
             results = self.model(frame)
-            
-            # Renderiza as detecções no frame
             annotated_frame = results[0].plot()
-            
-            # Mostra o frame com as detecções
             cv2.imshow('YOLO Object Detection', annotated_frame)
             
-            # Verifica se o usuário pressionou 'q' para sair
             key = cv2.waitKey(1) & 0xFF
             if key == ord('q'):
                 self._is_running = False
                 break
         
-        # Limpeza quando o loop terminar
         if self.cap and self.cap.isOpened():
             self.cap.release()
         cv2.destroyAllWindows()
